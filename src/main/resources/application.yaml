@@ -1,0 +1,9 @@
+spring:
+  data:
+    mongodb:
+      host: ${dbAddress}
+      port: ${dbPort}
+      database: ${dbName}
+bot:
+  name: ${botName}
+  token: ${botToken}
