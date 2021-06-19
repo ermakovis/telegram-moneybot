@@ -3,8 +3,7 @@ pipeline {
 	environment {
 		NEXUS = 'ermakovis'
 		RELEASE_TYPE = getReleaseType(env.BRANCH_NAME)
-		DB_CREDENTIALS = credentials('db_cred')
-		REGISTRY_CREDENTIALS = credentials('registry-cred')
+		REGISTRY_CREDENTIALS = credentials('docker')
 		VERSION = getNextVersion(RELEASE_TYPE)
 	}
 	stages {
