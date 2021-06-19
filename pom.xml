@@ -10,7 +10,7 @@
     </parent>
     <groupId>ru.ermakovis</groupId>
     <artifactId>moneybot</artifactId>
-    <version>1.0.1</version>
+    <version>${VERSION}</version>
     <name>moneybot</name>
 
     <properties>
