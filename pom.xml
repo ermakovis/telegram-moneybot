@@ -81,16 +81,16 @@
                     </from>
                     <to>
                         <!--suppress UnresolvedMavenProperty -->
-                        <image>${env.repoUsername}/${project.artifactId}</image>
+                        <image>${REGISTRY_CREDENTIALS_USR}/${project.artifactId}</image>
                         <tags>
                             <tag>${project.version}</tag>
                             <tag>latest</tag>
                         </tags>
                         <auth>
                             <!--suppress UnresolvedMavenProperty -->
-                            <username>${env.repoUsername}</username>
+                            <username>${REGISTRY_CREDENTIALS_USR}</username>
                             <!--suppress UnresolvedMavenProperty -->
-                            <password>${env.repoPassword}</password>
+                            <password>${REGISTRY_CREDENTIALS_PSW}</password>
                         </auth>
                     </to>
                     <container>

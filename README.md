@@ -1,1 +1,1 @@
-qq
+telegram-moneybot
