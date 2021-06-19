@@ -22,8 +22,10 @@ pipeline {
         }
         stage('Push version'){
             steps {
+                sshagent(['github']) {
                     sh "git tag ${VERSION}"
                     sh "git push --tags --no-verify"
+                }
             }
         }
     }
