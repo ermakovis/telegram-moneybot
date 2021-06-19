@@ -7,12 +7,6 @@ pipeline {
 		VERSION = getNextVersion(RELEASE_TYPE)
 	}
 	stages {
-        stage('Env') {
-            steps {
-                echo "${VERSION}"
-                echo "${REGISTRY_CREDENTIALS_USR}"
-            }
-        }
         stage('Build') {
             steps {
                 withMaven(maven: 'maven 3.8.1') {
