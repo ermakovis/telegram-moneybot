@@ -3,17 +3,10 @@ pipeline {
 	environment {
 		NEXUS = 'ermakovis'
 		RELEASE_TYPE = getReleaseType(env.BRANCH_NAME)
-		DB_CREDENTIALS = credentials('db_cred')
-		REGISTRY_CREDENTIALS = credentials('registry-cred')
+		REGISTRY_CREDENTIALS = credentials('docker')
 		VERSION = getNextVersion(RELEASE_TYPE)
 	}
 	stages {
-        stage('Env') {
-            steps {
-                echo "${VERSION}"
-                echo "${REGISTRY_CREDENTIALS_USR}"
-            }
-        }
         stage('Build') {
             steps {
                 withMaven(maven: 'maven 3.8.1') {
@@ -23,8 +16,10 @@ pipeline {
         }
         stage('Push version'){
             steps {
+                sshagent(credentials: ['github']) {
                     sh "git tag ${VERSION}"
                     sh "git push --tags --no-verify"
+                }
             }
         }
     }
@@ -33,7 +28,7 @@ pipeline {
 static def getReleaseType(branchName) {
     if(branchName == "develop" || branchName.startsWith("feature/")) {
         return "SNAPSHOT";
-    } else if(branchName == "main" || branchName.startsWith("release/")){
+    } else if(branchName == "main" || branchName == "master" || branchName.startsWith("release/")){
         return "RELEASE";
     }
     else {
