@@ -28,7 +28,7 @@ pipeline {
 static def getReleaseType(branchName) {
     if(branchName == "develop" || branchName.startsWith("feature/")) {
         return "SNAPSHOT";
-    } else if(branchName == "main" || branchName.startsWith("release/")){
+    } else if(branchName == "main" || branchName == "master" || branchName.startsWith("release/")){
         return "RELEASE";
     }
     else {
