@@ -42,12 +42,19 @@ public class Bot extends TelegramLongPollingBot {
                     .sum();
             sendMsg(chatId, Double.toString(sum));
         } else if (isNumeric(message)) {
-            repository.save(new Entry(Double.parseDouble(message)));
-            sendMsg(chatId, "Записано");
+            sendMsg(chatId, saveEntry(Double.parseDouble(message)));
         } else if (isMathExpression(message)) {
             Double result = new ExpressionBuilder(message).build().evaluate();
-            repository.save(new Entry(result));
-            sendMsg(chatId, "Записано " + result);
+            sendMsg(chatId, saveEntry(result));
+        }
+    }
+
+    private String saveEntry(Double amount) {
+        try {
+            repository.save(new Entry(amount));
+            return "Записано";
+        } catch (Exception e) {
+            return "Не записано, какая-то хуйня с базой";
         }
     }
 
