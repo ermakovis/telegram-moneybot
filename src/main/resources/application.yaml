@@ -1,9 +1,7 @@
 spring:
   data:
     mongodb:
-      host: ${dbAddress}
-      port: ${dbPort}
-      database: ${dbName}
+      uri: mongodb://${dbAddress}:${dbPort}/${dbName}
 bot:
   name: ${botName}
   token: ${botToken}
