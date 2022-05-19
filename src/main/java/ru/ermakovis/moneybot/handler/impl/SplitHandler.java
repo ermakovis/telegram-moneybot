@@ -3,6 +3,7 @@ package ru.ermakovis.moneybot.handler.impl;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.experimental.Accessors;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import ru.ermakovis.moneybot.exception.IncorrectInputException;
 import ru.ermakovis.moneybot.handler.MessageHandler;
@@ -13,6 +14,7 @@ import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
 
+@Slf4j
 @Component
 public class SplitHandler implements MessageHandler {
     public static final String MISSING_CONTEXT_MESSAGE = "Missing context";
@@ -30,6 +32,7 @@ public class SplitHandler implements MessageHandler {
     @Override
     public String handle(String message) {
         try {
+            log.info("Handling split command");
             var lines = message.split("\n");
             if (lines.length < 2) {
                 throw new IncorrectInputException(MISSING_CONTEXT_MESSAGE);
